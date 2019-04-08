@@ -103,6 +103,7 @@
             this.btnLocal.TabIndex = 6;
             this.btnLocal.Text = "Perform local Page Swap";
             this.btnLocal.UseVisualStyleBackColor = true;
+            this.btnLocal.Click += new System.EventHandler(this.btnLocal_Click);
             // 
             // btnGlobal
             // 
