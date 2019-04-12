@@ -30,7 +30,7 @@
         {
             this.lstChanges = new System.Windows.Forms.ListBox();
             this.btnReset = new System.Windows.Forms.Button();
-            this.lsbTLB = new System.Windows.Forms.ListBox();
+            this.lstTLB = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lstSecondary = new System.Windows.Forms.ListBox();
             this.lstPhysical = new System.Windows.Forms.ListBox();
@@ -68,14 +68,15 @@
             this.btnReset.TabIndex = 31;
             this.btnReset.Text = "Reset";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // lsbTLB
+            // lstTLB
             // 
-            this.lsbTLB.FormattingEnabled = true;
-            this.lsbTLB.Location = new System.Drawing.Point(491, 133);
-            this.lsbTLB.Name = "lsbTLB";
-            this.lsbTLB.Size = new System.Drawing.Size(214, 160);
-            this.lsbTLB.TabIndex = 28;
+            this.lstTLB.FormattingEnabled = true;
+            this.lstTLB.Location = new System.Drawing.Point(491, 133);
+            this.lstTLB.Name = "lstTLB";
+            this.lstTLB.Size = new System.Drawing.Size(214, 160);
+            this.lstTLB.TabIndex = 28;
             // 
             // label3
             // 
@@ -159,7 +160,7 @@
             // 
             this.nudPageCount.Location = new System.Drawing.Point(23, 34);
             this.nudPageCount.Maximum = new decimal(new int[] {
-            8,
+            10,
             0,
             0,
             0});
@@ -227,6 +228,7 @@
             this.btnStop.TabIndex = 40;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnStart
             // 
@@ -251,7 +253,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lstChanges);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.lsbTLB);
+            this.Controls.Add(this.lstTLB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lstSecondary);
             this.Controls.Add(this.lstPhysical);
@@ -274,7 +276,7 @@
 
         private System.Windows.Forms.ListBox lstChanges;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.ListBox lsbTLB;
+        private System.Windows.Forms.ListBox lstTLB;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox lstSecondary;
         private System.Windows.Forms.ListBox lstPhysical;
