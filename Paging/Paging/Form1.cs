@@ -24,8 +24,8 @@ namespace Paging
 
         int processCount = 0,
             pageCount = 0,
-            primaryMemorySize = 15,
-            tlbSize = 5;
+            primaryMemorySize = 10,
+            tlbSize = 15;
 
         public Form1()
         {
@@ -214,17 +214,32 @@ namespace Paging
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            if (localThread.IsAlive)
-                localThread.Abort();
+            while (localThread.ThreadState == ThreadState.WaitSleepJoin)
+            {
+                try
+                {
+                    localThread.Abort();
+                }
+                catch { }
+            }
 
-            if (globalThread.IsAlive)
-                globalThread.Abort();
+            while (globalThread.ThreadState == ThreadState.WaitSleepJoin)
+            {
+                try
+                {
+                    globalThread.Abort();
+                }
+                catch { }
+            }
 
             processes.Clear();
             pages.Clear();
             secondary.Clear();
             primary.Clear();
             tlb.Clear();
+
+            processCount = 0;
+            pageCount = 0;
 
             lstChanges.Items.Clear();
             lstPhysical.Items.Clear();
@@ -244,21 +259,24 @@ namespace Paging
                     int lowestCount = Int32.MaxValue,
                         lowestPage = Int32.MaxValue;
 
-                    for (int y = 0; y < processes[x].Count; y++)
+                    for (int z = 0; z < processes.Count; z++)
                     {
-                        if (primary.Contains(processes[x][y]))
+                        for (int y = 0; y < processes[z].Count; y++)
                         {
-                            pages[processes[x][y]] += rdm.Next(2);
-
-                            int primaryIndex = primary.IndexOf(processes[x][y]);
-                            string primarytext = lstPhysical.Items[primaryIndex].ToString();
-                            primarytext = primarytext.Remove(primarytext.IndexOf("(")) + "(" + pages[processes[x][y]] + ")";
-                            lstPhysical.Items[primaryIndex] = primarytext;
-
-                            if (pages[processes[x][y]] < lowestCount)
+                            if (primary.Contains(processes[z][y]))
                             {
-                                lowestCount = pages[processes[x][y]];
-                                lowestPage = processes[x][y];
+                                pages[processes[z][y]] += rdm.Next(2);
+
+                                int primaryIndex = primary.IndexOf(processes[z][y]);
+                                string primarytext = lstPhysical.Items[primaryIndex].ToString();
+                                primarytext = primarytext.Remove(primarytext.IndexOf("(")) + "(" + pages[processes[z][y]] + ")";
+                                lstPhysical.Items[primaryIndex] = primarytext;
+
+                                if (pages[processes[z][y]] < lowestCount)
+                                {
+                                    lowestCount = pages[processes[z][y]];
+                                    lowestPage = processes[z][y];
+                                }
                             }
                         }
                     }
