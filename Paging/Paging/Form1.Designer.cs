@@ -35,19 +35,21 @@
             this.btnLocal = new System.Windows.Forms.Button();
             this.lsbTLB = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lsbSecondary = new System.Windows.Forms.ListBox();
-            this.lsbPhysical = new System.Windows.Forms.ListBox();
+            this.lstSecondary = new System.Windows.Forms.ListBox();
+            this.lstPhysical = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lstChanges
             // 
             this.lstChanges.FormattingEnabled = true;
-            this.lstChanges.Location = new System.Drawing.Point(248, 15);
+            this.lstChanges.Location = new System.Drawing.Point(248, 24);
             this.lstChanges.Name = "lstChanges";
-            this.lstChanges.Size = new System.Drawing.Size(454, 147);
+            this.lstChanges.Size = new System.Drawing.Size(454, 134);
             this.lstChanges.TabIndex = 33;
+            this.lstChanges.SelectedIndexChanged += new System.EventHandler(this.lstChanges_SelectedIndexChanged);
             // 
             // btnAddPage
             // 
@@ -57,6 +59,7 @@
             this.btnAddPage.TabIndex = 32;
             this.btnAddPage.Text = "Add Page to Secondary Storage";
             this.btnAddPage.UseVisualStyleBackColor = true;
+            this.btnAddPage.Click += new System.EventHandler(this.btnAddPage_Click);
             // 
             // btnClear
             // 
@@ -64,7 +67,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(214, 28);
             this.btnClear.TabIndex = 31;
-            this.btnClear.Text = "Clear Pages in TLB";
+            this.btnClear.Text = "Reset";
             this.btnClear.UseVisualStyleBackColor = true;
             // 
             // btnGlobal
@@ -103,32 +106,21 @@
             this.label3.TabIndex = 27;
             this.label3.Text = "Pages currently in the TLB\r\n\r\n";
             // 
-            // lsbSecondary
+            // lstSecondary
             // 
-            this.lsbSecondary.FormattingEnabled = true;
-            this.lsbSecondary.Items.AddRange(new object[] {
-            "Page 1",
-            "Page 2",
-            "Page 3",
-            "Page 4",
-            "Page 5",
-            "Page 6",
-            "Page 7",
-            "Page 8",
-            "Page 9",
-            "Page 10"});
-            this.lsbSecondary.Location = new System.Drawing.Point(248, 189);
-            this.lsbSecondary.Name = "lsbSecondary";
-            this.lsbSecondary.Size = new System.Drawing.Size(214, 238);
-            this.lsbSecondary.TabIndex = 26;
+            this.lstSecondary.FormattingEnabled = true;
+            this.lstSecondary.Location = new System.Drawing.Point(248, 189);
+            this.lstSecondary.Name = "lstSecondary";
+            this.lstSecondary.Size = new System.Drawing.Size(214, 238);
+            this.lstSecondary.TabIndex = 26;
             // 
-            // lsbPhysical
+            // lstPhysical
             // 
-            this.lsbPhysical.FormattingEnabled = true;
-            this.lsbPhysical.Location = new System.Drawing.Point(12, 189);
-            this.lsbPhysical.Name = "lsbPhysical";
-            this.lsbPhysical.Size = new System.Drawing.Size(214, 238);
-            this.lsbPhysical.TabIndex = 25;
+            this.lstPhysical.FormattingEnabled = true;
+            this.lstPhysical.Location = new System.Drawing.Point(12, 189);
+            this.lstPhysical.Name = "lstPhysical";
+            this.lstPhysical.Size = new System.Drawing.Size(214, 238);
+            this.lstPhysical.TabIndex = 25;
             // 
             // label2
             // 
@@ -150,12 +142,23 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Physical Memory Pages";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label4.Location = new System.Drawing.Point(245, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 34;
+            this.label4.Text = "Changes";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(717, 442);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lstChanges);
             this.Controls.Add(this.btnAddPage);
             this.Controls.Add(this.btnClear);
@@ -163,8 +166,8 @@
             this.Controls.Add(this.btnLocal);
             this.Controls.Add(this.lsbTLB);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.lsbSecondary);
-            this.Controls.Add(this.lsbPhysical);
+            this.Controls.Add(this.lstSecondary);
+            this.Controls.Add(this.lstPhysical);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
@@ -184,10 +187,11 @@
         private System.Windows.Forms.Button btnLocal;
         private System.Windows.Forms.ListBox lsbTLB;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox lsbSecondary;
-        private System.Windows.Forms.ListBox lsbPhysical;
+        private System.Windows.Forms.ListBox lstSecondary;
+        private System.Windows.Forms.ListBox lstPhysical;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
     }
 }
 
