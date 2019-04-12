@@ -13,13 +13,19 @@ namespace Paging
     public partial class Form1 : Form
     {
         List<List<int>> processes = new List<List<int>>();
-        List<int> TLB = new List<int>();
+        List<int> tlb = new List<int>();
+
         public Form1()
         {
             InitializeComponent();
         }
 
         private void btnLocal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
