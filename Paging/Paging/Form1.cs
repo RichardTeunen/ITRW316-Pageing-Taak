@@ -139,8 +139,11 @@ namespace Paging
             int counter = 0;
             while (true)
             {
+                UpdateTLB();
                 for (int x = 0; x < processes.Count; x++)
                 {
+                    UpdateTLB();
+
                     int index = counter % processes[x].Count;
                     int lowestCount = Int32.MaxValue,
                         lowestPage = Int32.MaxValue;
@@ -162,27 +165,30 @@ namespace Paging
                                 lowestPage = processes[x][y];
                             }
                         }
-                    }
 
-                    UpdateTLB();
+                        UpdateTLB();
+                    }
 
                     if (secondary.Contains(processes[x][index]) && primary.Contains(lowestPage))
                     {
                         int indexPrimary = primary.IndexOf(lowestPage);
                         int indexSecondary = secondary.IndexOf(processes[x][index]);
+                        int sleepTime;
 
                         string output = "";
 
                         if (tlb.Contains(processes[x][index]))
                         {
                             output = " from the TLB with ";
-                            Thread.Sleep(200);
-                        }   
+                            sleepTime = 50 + rdm.Next(150);
+                        }
                         else
                         {
                             output = " from the secondary storage with ";
-                            Thread.Sleep(1000);
-                        }                            
+                            sleepTime = 300 + rdm.Next(700);
+                        }
+
+                        Thread.Sleep(sleepTime);
 
                         int temp = primary[indexPrimary];
                         primary[indexPrimary] = secondary[indexSecondary];
@@ -196,7 +202,7 @@ namespace Paging
 
                         string currentSecondary = lstSecondary.Items[indexSecondary].ToString();
                         currentSecondary = currentSecondary.Remove(currentSecondary.IndexOf("("));
-                        output = output + currentSecondary + " to the primary storage";
+                        output = output + currentSecondary + " to the primary storage.Time elapsed = " + sleepTime + " ms";
 
                         currentSecondary += "(" + pages[processes[x][index]] + ")";
 
@@ -287,19 +293,22 @@ namespace Paging
                     {
                         int indexPrimary = primary.IndexOf(lowestPage);
                         int indexSecondary = secondary.IndexOf(processes[x][index]);
+                        int sleepTime;
 
                         string output = "";
 
                         if (tlb.Contains(processes[x][index]))
                         {
                             output = " from the TLB with ";
-                            Thread.Sleep(200);
+                            sleepTime = rdm.Next(200);
                         }
                         else
                         {
                             output = " from the secondary storage with ";
-                            Thread.Sleep(1000);
+                            sleepTime = 200 + rdm.Next(800);
                         }
+
+                        Thread.Sleep(sleepTime);
 
                         int temp = primary[indexPrimary];
                         primary[indexPrimary] = secondary[indexSecondary];
@@ -313,7 +322,7 @@ namespace Paging
 
                         string currentSecondary = lstSecondary.Items[indexSecondary].ToString();
                         currentSecondary = currentSecondary.Remove(currentSecondary.IndexOf("("));
-                        output = output + currentSecondary + " to the primary storage";
+                        output = output + currentSecondary + " to the primary storage. Time elapsed = " + sleepTime + " ms";
 
                         currentSecondary += "(" + pages[processes[x][index]] + ")";
 
